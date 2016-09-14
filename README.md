@@ -1,3 +1,5 @@
 # passloc
 password locker program
-version 0.1
+version 1.0
+
+TODO: add proper documentation
