@@ -2,6 +2,7 @@ import sys
 import getopt
 import getpass
 import lockercrypto
+import os
 
 def usage():
     print('''passloc - password management tool
@@ -27,9 +28,9 @@ def select_service(pd):
     print('')
     service = input('Enter a service (ie gmail, amazon, netflix): ')
     try:
-        print('{: >15} {: >15} {: >15}'.format('Service','Username','Password'))
-        print(''.ljust(50,'-'))
-        result = '{: >15} {: >15} {: >15}'.format(
+        print('{: >15} {: >15} {: >30}'.format('Service','Username','Password'))
+        print(''.ljust(65,'-'))
+        result = '{: >15} {: >15} {: >30}'.format(
             service,pd[service].split(':')[0],pd[service].split(':')[1])
         print(result)
         print('')
@@ -39,10 +40,10 @@ def select_service(pd):
     
 def select_all(pd):
     print('')
-    print('{: >15} {: >15} {: >15}'.format('Service','Username','Password'))
-    print(''.ljust(50,'-'))
+    print('{: >15} {: >15} {: >30}'.format('Service','Username','Password'))
+    print(''.ljust(65,'-'))
     for key,value in pd.items():
-        print('{: >15} {: >15} {: >15}'.format(
+        print('{: >15} {: >15} {: >30}'.format(
             key,value.split(':')[0],value.split(':')[1]))
     print('')
 
@@ -135,6 +136,12 @@ def main():
             file = a
         else:
             assert False, "unhandled exception"
+            
+    if os.path.isfile(file) and newfile:
+        confirmation = input('File already exists, overwrite? [y/n]: ')
+        if confirmation.lower() != 'y':
+            print('Exiting.')
+            sys.exit(0)
 
     while not len(password):
         password = getpassword(newfile)
