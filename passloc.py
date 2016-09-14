@@ -1,6 +1,7 @@
 import sys
 import getopt
 import getpass
+import lockercrypto
 
 def usage():
     print('''passloc - password management tool
@@ -104,6 +105,7 @@ def run_locker(filename, password, newfile):
             add_service(password_dictionary)
         elif choice == "exit":
             lockercrypto.encrypt(filename, password, password_dictionary)
+            print('Successfully saved locker into file ' + filename)
             sys.exit(0)
         else:
             print('INVALID SELECTION')
@@ -116,7 +118,7 @@ def main():
     try:
         opts, args = getopt.getopt(sys.argv[1:], "hn:f:p:",
         ["help", "new", "file","password"])
-    except getopt.Getopterror as err:
+    except getopt.GetoptError as err:
         print(err)
         usage()
         
@@ -136,8 +138,13 @@ def main():
 
     while not len(password):
         password = getpassword(newfile)
-        
-    run_locker(file, password, newfile)
+    
+    try:    
+        run_locker(file, password, newfile)
+    except FileNotFoundError:
+        print('Locker file not found, exiting.')
+    except ValueError:
+        print('Password is incorrect, exiting.')
 
 if __name__ == "__main__":    
     main()
