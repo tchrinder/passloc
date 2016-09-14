@@ -1,4 +1,3 @@
-import os
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.backends import default_backend
@@ -33,20 +32,20 @@ def encrypt(filename, password, pd):
         finished = False
         
         while not finished:
-           data = pd_bytes.read(1024 * AES.block_size)
-           if len(data) == 0 or len(data) % AES.block_size != 0:
-            pad_length = AES.block_size - (len(data) % AES.block_size)
-            data += (chr(pad_length) * pad_length).encode()
-            finished = True
-           f.write(cipher.encrypt(data))
+            data = pd_bytes.read(1024 * AES.block_size)
+            if len(data) == 0 or len(data) % AES.block_size != 0:
+                pad_length = AES.block_size - (len(data) % AES.block_size)
+                data += (chr(pad_length) * pad_length).encode()
+                finished = True
+            f.write(cipher.encrypt(data))
 
 def decrypt(filename, password):
     backend = default_backend()
     data = b''
     
     with open(filename, 'rb') as f:
-        salt = f.read(16)
-        salt_iv = f.read(16)
+        salt = f.read(AES.block_size)
+        salt_iv = f.read(AES.block_size)
         key_derivation = PBKDF2HMAC(
             algorithm = hashes.SHA256(),
             length = 32,
