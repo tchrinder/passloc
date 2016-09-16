@@ -6,9 +6,9 @@
 ## Installation 
 #### From Linux terminal or Windows command line:
 
-git clone -b development https://github.com/tchrinder/passloc.git
-cd passloc
-pip install -r requirements.txt
+git clone -b development https://github.com/tchrinder/passloc.git  
+cd passloc  
+pip install -r requirements.txt  
 
 ## Usage
 
