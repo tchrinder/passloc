@@ -1,5 +1,4 @@
 # passloc
-<<<<<<< HEAD
 # password locker program
 # python3
 ## version 1.0
@@ -35,9 +34,3 @@ Refer to https://packaging.python.org/extensions/#building-binary-extensions
 to find and install the required software before trying the following command
 
 pip install PyCrypto
-
-
-
-
-
-
