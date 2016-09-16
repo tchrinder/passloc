@@ -142,14 +142,15 @@ def main():
         if confirmation.lower() != 'y':
             print('Exiting.')
             sys.exit(0)
+    elif not os.path.isfile(file) and not newfile:
+        print('Locker file not found, exiting.')
+        sys.exit(0)
 
     while not len(password):
         password = getpassword(newfile)
     
     try:    
         run_locker(file, password, newfile)
-    except FileNotFoundError:
-        print('Locker file not found, exiting.')
     except ValueError:
         print('Password is incorrect, exiting.')
 
