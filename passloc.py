@@ -81,6 +81,7 @@ def run_locker(filename, password, newfile):
     else:
         password_dictionary = {}
     
+    print('')
     print('Password Locker initialization successful')
     print('')
     while True:
