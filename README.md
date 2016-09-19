@@ -1,7 +1,7 @@
 # passloc
-# password locker program
-# python3
-## version 1.0
+### password locker program
+### python3
+#### version 1.02
 
 ## Installation 
 #### From Linux terminal or Windows command line:
